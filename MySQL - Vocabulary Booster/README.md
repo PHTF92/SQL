@@ -1,4 +1,4 @@
-## SQL Challenges
+## SQL Challenges 
 
 1. It has been decided that we will continue to serve only region 1. Therefore, using the `countries` table of the `hr` bank as a reference, we need a report in which the country name in the `country_name` column and a second column dubbed `Inclusion Status`, which will display the country status. This second column must be generated based on the value of the `region_id` column and its value must be either "included" or "not included". Use the `IF` or `CASE` conditional commands to generate exactly 25 results, as in the following image:
 
