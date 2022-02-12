@@ -65,7 +65,7 @@ Your challenge now is to take all the structure you created in the previous sect
 
 * Create a database named **`SpotifyClone`**;
 
-* Provide the necessary queries to create normalized tables that meet the requirements described in the previous section;
+* Provide the necessary queries to create normalized tables that meet the requirements described in the previous section; 
 
 * Provide the necessary queries to populate the tables according to the data listed in the previous section.
 
