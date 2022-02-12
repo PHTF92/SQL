@@ -1,304 +1,304 @@
-### Problema a ser resolvido
+### Problem to be solved
 
-Imagine que a gerência de sua empresa de desenvolvimento de software solicitou para você que um banco de dados seja projetado para a seguinte situação:
+Imagine that the management of your software development company has asked you to design a database for the following situation:
 
-"Precisamos montar a estrutura do banco de dados que será usado no sistema de agendamento de viagens. A estrutura esperada para este módulo do sistema deve ser capaz de armazenar informações importantes sobre as pessoas que usam a aplicação, como: nome, idade e profissão. Devemos ter uma maneira de armazenar informações sobre as possíveis viagens que uma pessoa pode fazer, tais como: nome do pacote, destino (que deve conter no mínimo informações sobre a cidade e país de destino), data prevista de ida, data prevista de volta e custo total da viagem."
+"We need to assemble the structure of the database that will be used in the travel scheduling system. The structure expected for this module of the system must be able to store important information about the people who use the application, such as: name, age and profession. We must have a way to store information about the possible trips that a person can take, such as: package name, destination (which should at least contain information about the city and country of destination), expected departure date, expected return date and total cost of the trip."
 
-* Uma pessoa pode comprar mais de um pacote de viagens, mas **não** pode comprar o mesmo pacote duas ou mais vezes;
+* A person can buy more than one travel package, but **not** can buy the same package twice or more;
 
-* Um pacote de viagens pode possuir mais de um destino;
+* A travel package can have more than one destination;
 
-* Um pacote de viagens deve possuir o campo `purchase_count` (contagem de compras), com o valor padrão de 0;
+* A travel package must have the `purchase_count` field, with the default value of 0;
 
-* Toda coluna que representa o identificador único dos registros de uma tabela deve ter seu valor gerado automaticamente de forma incremental, com exceção de tabelas que sejam agregações de outras tabelas (como é o caso da tabela `film_category` do banco `sakila`, por exemplo).
-
----
-
-### Dados
-
-Tendo em mente a descrição acima, a estrutura do banco de dados criado deve ser capaz de armazenar todas as informações abaixo:
-
-* Rafael Martins, 33, Arquiteto, contratou o pacote "Promoção 3 destinos" no valor de R$12.500,99 e tem uma viagem programada para o dia 25/09/2022, com a volta prevista para o dia 12/10/2022. A viagem deve passar pelos seguintes destinos:
-    - Cape Town, África do Sul;
-
-    - Bali, Indonésia;
-
-    - Marrakesh, Marrocos.
-
-* Amanda Rocha, 25, Desenvolvedora de Software, contratou o pacote "Vem Pro Verão" no valor de R$9.650,99 e tem uma viagem programa para o dia 16/10/2022, com a volta prevista para o dia 26/10/2022. A viagem deve passar por dois destinos diferentes:
-    - Paris, França;
-
-    - Nova Iorque, Estados Unidos.
-
-* Jonas Cabral, 18, Pintor, contratou o pacote "Cultura Francesa" no valor de R$3.900,99 e tem uma viagem programada para o dia 12/07/2022, com a volta prevista para o dia 20/07/2022. A viagem tem o destino único de:
-    - Paris, França.
-
-* Carol Domingues, 37, Contadora, contratou o pacote "Vem Pro Verão" no valor de R$7.725,99 e tem uma viagem programada para o dia 19/02/2022, com a volta prevista para o dia 26/03/2022. A viagem possui os seguintes destinos:
-    - Cape Town, África do Sul;
-
-    - Bali, Indonésia.
-
-* Sabrina Ferreira, 45, Engenheira de Alimentos, contratou o pacote "Cultura Francesa" no valor de R$3.900,99 e tem uma viagem programada para o dia 12/07/2022, com a volta prevista para o dia 20/07/2022. A viagem tem o destino único de:
-    - Paris, França.
-
-* Sabrina Ferreira, 45, Engenheira de Alimentos, também contratou o pacote "Promoção 3 destinos" com o valor de R$13.500,99 e tem uma viagem programa para o dia 13/09/2022, com a volta prevista para o dia 18/10/2022. A viagem possui os seguintes destinos:
-    - Marrakesh, Marrocos;
-
-    - Nova Iorque, Estados Unidos;
-
-    - Paris, França.
-
-Mais adiante neste projeto, você será solicitado a popular o banco de dados que criar, com os dados acima.
+* Every column that represents the unique identifier of the records of a table must have its value automatically generated incrementally, with the exception of tables that are aggregations of other tables (as is the case of the `film_category` table of the `sakila` database, for example).
 
 ---
 
-### Identifique as entidades
+### Data
 
-Com base no problema apresentado anteriormente identifique as entidades presentes na história. Suas entidades devem representar:
+Keeping in mind the description above, the database structure created must be able to store all the information below:
 
-* A pessoa (`users`);
+* Rafael Martins, 33, Architect, hired the "Promotion 3 destinations" package worth R$12,500.99 and has a trip scheduled for 09/25/2022, with the return scheduled for 10/12/2022. The trip must pass through the following destinations:
+    - Cape Town, South Africa;
 
-* O pacote de viagens (`travel_packages`);
+    - Bali, Indonesia;
 
-* O destino (`locations`);
+    - Marrakesh, Morocco.
 
-* A agregação entre pacotes de viagens e destinos (`travel_packages_locations`);
+* Amanda Rocha, 25, Software Developer, hired the package "Vem Pro Verão" worth R$9,650.99 and has a scheduled trip for 10/16/2022, with the return scheduled for 10/26/ 2022 The trip must pass through two different destinations:
+    - Paris, France;
 
-* A compra de pacotes de viagens pelas pessoas (`purchases`).
+    - New York, United States.
 
-Seu objetivo aqui é de ter essa informação em algum lugar, para que possa usar nos próximos passos.
+* Jonas Cabral, 18, Pintor, hired the "French Culture" package worth R$3,900.99 and has a trip scheduled for 07/12/2022, with the return scheduled for 07/20/2022. The trip has the single destination of:
+    - Paris, France.
 
----
+* Carol Domingues, 37, Contadora, hired the "Vem Pro Verão" package for R$7,725.99 and has a trip scheduled for 02/19/2022, with the return scheduled for 03/26/2022. The trip has the following destinations:
+    - Cape Town, South Africa;
 
-### Identifique os atributos
+    - Bali, Indonesia.
 
-Identifique e anote os atributos das entidades encontradas no passo anterior, com exceção de `users`, cujos atributos devem ser:
+* Sabrina Ferreira, 45, Food Engineer, hired the "French Culture" package worth R$3,900.99 and has a trip scheduled for 07/12/2022, with the return scheduled for 07/20/2022 . The trip has the single destination of:
+    - Paris, France.
 
-* `id`: Identificador único da pessoa;
+* Sabrina Ferreira, 45, Food Engineer, also hired the "Promotion 3 destinations" package with the value of R$13,500.99 and has a scheduled trip for the 13/09/2022, with the return scheduled for the 18/ 10/2022. The trip has the following destinations:
+    - Marrakesh, Morocco;
 
-* `full_name`: Nome completo da pessoa;
+    - New York, United States;
 
-* `current_age`: Idade atual da pessoa;
+    - Paris, France.
 
-* `current_job`: Profissão atual da pessoa.
-
-Leia a descrição do problema novamente para ter certeza que, no mínimo, os atributos especificados na descrição foram identificados. Todas as tabelas devem possuir algum campo identificador (campo que identifica unicamente o registro).
-
-**Dica:** um campo indentificador pode ser composto por uma ou mais colunas. 😉
-
-Seu objetivo aqui é de ter essa informação em algum lugar, para que possa usar nos próximos passos.
-
----
-
-### Identifique os relacionamentos
-
-Identifique os relacionamentos entre cada uma das entidades.
-
-Feito isso crie um diagrama de relacionamento das entidades `users`, `travel_packages`, `locations`, `travel_packages_locations` e `purchases`. Veja, a seguir, um exemplo de diagrama que demonstra relacionamentos entre entidades de forma visual.
-
-![Diagrama ER, simplificado, de exemplo](./images/relationship1.png)
-
-Esta seção é crucial para que você consiga mapear e visualizar como uma entidade deve se relacionar com as outras. Seu objetivo aqui é de ter essa informação em algum lugar, para que possa usar nos próximos passos.
+Later in this project, you will be asked to populate the database you create with the above data.
 
 ---
 
-### Diagrama Entidade-Relacionamento detalhado
+### Identify the entities
 
-Crie um diagrama entidade-relacionamento contendo as informações sobre as entidades, atributos e relacionamentos. Faça-o de forma similar ao diagrama abaixo (apenas uma ilustração 😎):
+Based on the problem presented above, identify the entities present in the story. Your entities must represent:
 
-![Diagrama entidade-relacionamento ilustrativo](./images/relationship2.png)
+* The person (`users`);
 
-Você pode fazer esse diagrama tanto em papel quanto através de alguma ferramenta de diagramação como o [draw.io](https://www.draw.io/). Caso decida usar o [draw.io](https://www.draw.io/), veja [este vídeo](https://www.youtube.com/watch?v=lAtCySGDD48) e aprenda mais sobre essa ferramenta. Lembre-se que você pode ativar a legenda do vídeo, marcar a opção de tradução automática e depois selecionar o idioma português.
+* The travel package (`travel_packages`);
 
-Esta seção também é crucial para que você consiga modelar bancos de dados com sucesso, incluindo o deste projeto. Seu objetivo aqui é de ter essa informação em algum lugar, para que possa usar nos desafios.
+* The destination (`locations`);
+
+* The aggregation between travel packages and destinations (`travel_packages_locations`);
+
+* The purchase of travel packages by people (`purchases`).
+
+Your goal here is to have this information somewhere so you can use it in your next steps.
 
 ---
 
-## Desafio 1 - Providencie a estrutura do banco de dados
+### Identify the attributes
 
-Providencie um único arquivo SQL com o nome de `desafio1.sql`, que ao ser executado deve:
+Identify and note the attributes of the entities found in the previous step, with the exception of `users`, whose attributes must be:
 
-* Criar o banco de dados de nome `queries_unite`, **em caixa baixa**;
+* `id`: Unique identifier of the person;
 
-* Definir o banco de dados `queries_unite` como ativo;
+* `full_name`: The person's full name;
 
-* Criar todas as tabelas necessárias;
+* `current_age`: Current age of the person;
 
-* Popular o seu banco **somente** com as informações presentes na seção [**Dados**](#dados) (insira apenas os valores entregues, **não modifique-os** para CAIXA ALTA ou caixa baixa, insira-os **exatamente** como estão na descrição).
+* `current_job`: The person's current occupation.
 
-#### Exemplo de como popular um banco de dados
+Read the problem description again to make sure that, at a minimum, the attributes specified in the description have been identified. All tables must have some identifier field (a field that uniquely identifies the record).
+
+**Tip:** an identifier field can be composed of one or more columns. 😉
+
+Your goal here is to have this information somewhere so you can use it in your next steps.
+
+---
+
+### Identify the relationships
+
+Identify the relationships between each of the entities.
+
+Then create a relationship diagram of the entities `users`, `travel_packages`, `locations`, `travel_packages_locations` and `purchases`. The following is an example diagram that visually demonstrates relationships between entities.
+
+![ER diagram, simplified, example](./images/relationship1.png)
+
+this sectiono is crucial for you to be able to map and visualize how an entity should relate to others. Your goal here is to have this information somewhere so you can use it in your next steps.
+
+---
+
+### Detailed Entity-Relationship Diagram
+
+Create an entity-relationship diagram containing information about entities, attributes, and relationships. Do it similar to the diagram below (just an illustration 😎):
+
+![Illustrative entity-relationship diagram](./images/relationship2.png)
+
+You can make this diagram either on paper or through a diagramming tool like [draw.io](https://www.draw.io/). If you decide to use [draw.io](https://www.draw.io/), watch [this video](https://www.youtube.com/watch?v=lAtCySGDD48) and learn more about this tool . Remember that you can activate the video subtitles, check the automatic translation option and then select the Portuguese language.
+
+This section is also crucial for you to successfully model databases, including the one in this project. Your goal here is to have this information somewhere so you can use it in challenges.
+
+---
+
+## Challenge 1 - Provide the database structure
+
+Provide a single SQL file named `challenge1.sql`, which when executed should:
+
+* Create the database named `queries_unite`, **in lowercase**;
+
+* Set the `queries_unite` database to active;
+
+* Create all necessary tables;
+
+* Populate your bank **only** with the information present in the [**Data**](#data) section (enter only the amounts delivered, **do not change them** to CAPITAL CASSETTES or LOWCASE, enter -them **exactly** as they are in the description).
+
+#### Example of how to populate a database
 
 ```mysql
 CREATE DATABASE IF NOT EXISTS queries_unite;
 
-USE queries_unite;
+USE queries_unit;
 
-CREATE TABLE tabela1(
-    coluna1 tipo restricoes,
-    coluna2 tipo restricoes,
-    colunaN tipo restricoes,
+CREATE TABLE table1(
+    column1 type constraints,
+    column2 type constraints,
+    columnN type constraints,
 );
 
-CREATE TABLE tabela2(
-    coluna1 tipo restricoes,
-    coluna2 tipo restricoes,
-    colunaN tipo restricoes,
+CREATE TABLE table2(
+    column1 type constraints,
+    column2 type constraints,
+    columnN type constraints,
 );
 
-INSERT INTO tabela1 (coluna1, coluna2)
-       VALUES ('exemplo de dados 1', 'exemplo de dados A'),
-              ('exemplo de dados 2', 'exemplo de dados B'),
-              ('exemplo de dados 3', 'exemplo de dados C');
+INSERT INTO table1 (column1, column2)
+       VALUES('data example 1', 'data example A'),
+              ('data example 2', 'data example B'),
+              ('data example 3', 'data example C');
 
-INSERT INTO tabela2 (coluna1, coluna2)
-       VALUES ('exemplo de dados 1', 'exemplo de dados X'),
-              ('exemplo de dados 2', 'exemplo de dados Y');
+INSERT INTO table2 (column1, column2)
+       VALUES('data example 1', 'data example X'),
+              ('data example 2', 'data example Y');
 ```
 
-## Desafio 2 - Clone a tabela `users`
+## Challenge 2 - Clone the `users` table
 
-Crie um clone chamado `clone_troopers` para a tabela `users`.
+Create a clone called `clone_troopers` for the `users` table.
 
-## Desafio 3 - Altere a tabela `clone_troopers`
+## Challenge 3 - Change the `clone_troopers` table
 
-Faça as seguintes alterações na tabela `clone_troopers`:
+Make the following changes to the `clone_troopers` table:
 
-* Adicione a coluna `nickname`, que deve ser do tipo `VARCHAR(50)`, não nulo;
+* Add column `nickname`, which must be of type `VARCHAR(50)`, not null;
 
-* Altere a coluna `current_age`, de forma que seu tipo passe a ser `TINYINT`;
+* Change the `current_age` column so that its type is `TINYINT`;
 
-* Altere o nome da coluna `full_name` para `origin_name` e garanta que não seja possível inserir nomes repetidos;
+* Change the column name from `full_name` to `origin_name` and ensure that you cannot enter repeated names;
 
-* Exclua a coluna `current_job`.
+* Delete the `current_job` column.
 
-## Desafio 4 - Exclua a tabela `clone_troopers`
+## Challenge 4 - Delete the `clone_troopers` table
 
-Exclua a tabela `clone_troopers`.
+Delete the `clone_troopers` table.
 
-## Desafio 5 - VIEW travel_package_info
+## Challenge 5 - VIEW travel_package_info
 
-Crie uma `VIEW` chamada `travel_package_info`, que deve mostrar todas as compras cadastradas no sistema, exibindo os resultados da seguinte forma:
+Create a `VIEW` called `travel_package_info`, which should show all purchases registered in the system, displaying the results as follows:
 
-* `travel_package_id`: Identificação única do pacote de viagens;
+* `travel_package_id`: Unique identification of the travel package;
 
-* `travel_package_name`: Nome do pacote de viagens;
+* `travel_package_name`: Name of the travel package;
 
-* `user_id`: Identificação única da pessoa;
+* `user_id`: Unique identification of the person;
 
-* `user_name`: Nome da pessoa;
+* `user_name`: Name of the person;
 
-* `cost`: Custo total da viagem.
+* `cost`: Total cost of the trip.
 
-Os resultados da `VIEW` devem ser ordenados pelo custo total das viagens de forma decrescente. Ao fazer uma pesquisa em sua `VIEW` sem filtros você deve produzir os mesmos resultados da imagem a seguir:
+The `VIEW` results must be sorted by the total cost of the trips in descending order. When searching your `VIEW` without filters you should produce the same results as the following image:
 
-![Resultado esperado para uma consulta sem filtros na VIEW travel_package_info](./images/desafio5.png)
+![Expected result for an unfiltered query in the VIEW travel_package_info](./images/desafio5.png)
 
-## Desafio 6 - VIEW amount_spent_by_user
+## Challenge 6 - VIEW amount_spent_by_user
 
-Crie uma `VIEW` chamada `amount_spent_by_user`, que mostre o nome e total gasto em viagens até o momento por todos as pessoas presentes no sistema, conforme as especificações a seguir:
+Create a `VIEW` called `amount_spent_by_user`, which shows the name and total spent on trips so far by everyone present in the system, according to the following specifications:
 
-* `user_id`: Identificação única da pessoa;
+* `user_id`: Unique identification of the person;
 
-* `user_name`: Nome da pessoa;
+* `user_name`: Name of the person;
 
-* `amount`: Total gasto pela pessoa.
+* `amount`: Total spent by the person.
 
-Os gastos devem estar agrupados e ordenados de forma crescente. Ao fazer uma pesquisa em sua `VIEW` sem filtros você deve produzir os mesmos resultados da imagem a seguir.
+Expenses must be grouped and sorted in ascending order. Searching your `VIEW` without filters should produce the same results as the image below.
 
-![Resultado esperado para uma consulta sem filtros na VIEW amount_spent_by_user](./images/desafio6.png)
+![Expected result for an unfiltered query in the VIEW amount_spent_by_user](./images/desafio6.png)
 
-## Desafio 7 - VIEW top_3_locations
+## Challenge 7 - VIEW top_3_locations
 
-Crie uma `VIEW` chamada `top_3_locations`, que exibe os top 3 destinos mais frequentados, de acordo com as especificações a seguir:
+Create a `VIEW` called `top_3_locations`, which displays the top 3 most frequented destinations, according to the following specifications:
 
-* `id`: Identificação única da localização;
+* `id`: Unique identification of the location;
 
-* `city`: Nome da cidade;
+* `city`: Name of the city;
 
-* `country`: Nome do país;
+* `country`: Name of the country;
 
-* `travel_amount`: Quantidade de visitas à localização.
+* `travel_amount`: Number of visits to the location.
 
-Os resultados devem ser agrupados pela coluna identificadora do destino e ordenados pela quantidade de visitas à localização, de forma decrescente. Caso haja mais de uma localização com a mesma quantidade de visitas, o critério de desempate será a ordenação pelo id da localização, de forma crescente. Ao fazer uma pesquisa em sua `VIEW` sem filtros você deve produzir os mesmos resultados da imagem a seguir.
+The results must be grouped by the column identifying the destination and ordered by the number of visits to the location, in descending order. If there is more than one location with the same number of visits, the tie-breaking criterion will be sorting by location id, and growing. Searching your `VIEW` without filters should produce the same results as the image below.
 
-![Resultado esperado para uma consulta sem filtros na VIEW top_3_locations](./images/desafio7.png)
+![Expected result for an unfiltered query in VIEW top_3_locations](./images/desafio7.png)
 
-## Desafio 8 - VIEW revenue_report
+## Challenge 8 - VIEW revenue_report
 
-Crie uma nova `VIEW` chamada `revenue_report`, que deve exibir um relatório de lucros com as seguintes informações:
+Create a new `VIEW` called `revenue_report`, which should display a profit report with the following information:
 
-* `lowest_revenue`: Menor lucro, individual, obtido com um pacote de viagens;
+* `lowest_revenue`: Lowest individual profit from a travel package;
 
-* `biggest_revenue`: Lucro máximo, individual, obtido com um pacote de viagens;
+* `biggest_revenue`: Maximum individual profit made with a travel package;
 
-* `average_revenue`: Lucro médio obtido com todos os pacotes de viagens;
+* `average_revenue`: Average profit from all travel packages;
 
-* `total_revenue`: Lucro total obtido com todos os pacotes de viagens.
+* `total_revenue`: Total profit earned from all travel packages.
 
-**Dica:** Recomenda-se fazer uso de subquery para resolver este desafio.
+**Tip:** It is recommended to use subquery to solve this challenge.
 
-Ao fazer uma pesquisa em sua `VIEW` sem filtros você deve produzir os mesmos resultados da imagem a seguir.
+Searching your `VIEW` without filters should produce the same results as the image below.
 
-![Resultado esperado para uma consulta sem filtros na VIEW revenue_report](./images/desafio8.png)
+![Expected result for an unfiltered query in the VIEW revenue_report](./images/desafio8.png)
 
-## Desafio 9 - PROCEDURE find_travel_packages_by_period
+## Challenge 9 - PROCEDURE find_travel_packages_by_period
 
-Você deve criar uma `PROCEDURE` chamada `find_travel_packages_by_period`, que simula a funcionalidade de busca com filtros. Essa `PROCEDURE` deve receber 2 parâmetros de entrada: a data prevista de ida e a data previsa de volta. Ao ser executada ela deve retornar somente os resultados contidos dentro da faixa de datas especificadas.
+You should create a `PROCEDURE` called `find_travel_packages_by_period`, which simulates the search functionality with filters. This `PROCEDURE` must receive 2 input parameters: the expected departure date and the expected return date. When executed, it should return only the results contained within the specified date range.
 
-Para validar sua `PROCEDURE`, execute-a com os parâmetros data inicial e data final, com os respectivos valores de 17/07/2022 (`'2022-07-17'`) e 25/10/2022 (`'2022-10-25'`). O resultado deve ser exatamente igual ao da imagem abaixo:
+To validate your `PROCEDURE`, run it with the parameters start date and end date, with the respective values ​​of 07/17/2022 (`'2022-07-17'`) and 10/25/2022 (`'2022 -10-25'`). The result should be exactly like the image below:
 
-![Resultado esperado para uma consulta, com os filtros sugeridos, através da PROCEDURE find_travel_packages_by_period](./images/desafio9.png)
+![Expected result for a query, with the suggested filters, through the PROCEDURE find_travel_packages_by_period](./images/desafio9.png)
 
-## Desafio 10 - FUNCTION average_amount_spent_given_age_range
+## Challenge 10 - FUNCTION average_amount_spent_given_age_range
 
-Você deve criar uma `FUNCTION` chamada `average_amount_spent_given_age_range`, que recebe como parâmetros uma idade mínima e uma idade máxima. Sua `FUNCTION` deve retornar apenas o valor médio gasto em compras de pacotes nessa faixa etária. O resultado retornado pelo cálculo deve ser do tipo `DOUBLE`.
+You must create a `FUNCTION` called `average_amount_spent_given_age_range`, which takes as parameters a minimum age and a maximum age. Your `FUNCTION` should only return the average amount spent on package purchases in this age group. The result returned by the calculation must be of type `DOUBLE`.
 
-Para validar sua `FUNCTION`, execute-a com os parâmetros idade mínima e idade máxima, com os respectivos valores de 30 e 50 anos. O resultado deve ser exatamente igual ao da imagem abaixo:
+To validate your `FUNCTION`, run it with the minimum age and maximum age parameters, with the respective values ​​of 30 and 50 years. The result should be exactly like the image below:
 
-![Resultado esperado para a FUNCTION average_amount_spent_given_age_range, utilizando os parâmetros sugeridos](./images/desafio10.png)
+![Expected result for the average_amount_spent_given_age_range FUNCTION, using the suggested parameters](./images/desafio10.png)
 
-## Desafio 11 - TRIGGER increment_travel_package_purchases
+## Challenge 11 - TRIGGER increment_travel_package_purchases
 
-Você deve criar um `TRIGGER` chamado `increment_travel_package_purchases`, que será disparado a cada nova compra de um pacote de viagens. Quando disparado, esse `TRIGGER` deve incrementar em um a quantidade de compras do pacote definida na coluna `purchase_count`.
+You must create a `TRIGGER` called `increment_travel_package_purchases`, which will be fired with each new purchase of a travel package. When triggered, this `TRIGGER` must increment by one the amount of purchases of the package defined in the `purchase_count` column.
 
-Para validar seu `TRIGGER`, crie-o antes de inserir seus dados no banco. Caso você já tenha populado o banco, você pode excluí-lo e gerá-lo novamente, tendo definido o `TRIGGER` antes dos comandos de inserção de dados.
+To validate your `TRIGGER`, create it before entering your data in the database. If you have already populated the database, you can delete it and regenerate it, having defined the `TRIGGER` before the input commands.
 
-Uma vez populado o banco já com o `TRIGGER` definido, execute a query:
+Once the database is populated with the `TRIGGER` defined, execute the query:
 ```sql
 SELECT
     id,
     purchase_count
 FROM queries_unite.travel_packages;
 ```
-O resultado esperado para essa consulta é:
+The expected result for this query is:
 
-![Resultado esperado para a consulta `SELECT id, purchase_count FROM queries_unite.travel_packages para testar o TRIGGER`](./images/desafio11.png)
+![Expected result for query `SELECT id, purchase_count FROM queries_unite.travel_packages to test TRIGGER`](./images/desafio11.png)
 
-## Desafio 12 - INDEX users_full_name_index
+## Challenge 12 - INDEX users_full_name_index
 
-Para facilitar a busca por pessoas cadastradas no sistema, adicione um `INDEX` chamado `users_full_name_index` na coluna `full_name` da tabela `users`.
+To facilitate the search for people registered in the system, add an `INDEX` called `users_full_name_index` in the `full_name` column of the `users` table.
 
-## Desafio 13 - FULLTEXT INDEX users_current_job_index
+## Challenge 13 - FULLTEXT INDEX users_current_job_index
 
-Para facilitar estudos internos do perfil das pessoas que compram os pacotes de viagens, adicione um `FULLTEXT INDEX` chamado `users_current_job_index` na coluna `current_job` da tabela `users`.
+To facilitate internal profile studies of the people who buy the travel packages, add a `FULLTEXT INDEX` called `users_current_job_index` in the `current_job` column of the `users` table.
 
 ---
 
-## Instruções para entregar seu projeto:
+## Instructions for submitting your project:
 
-### Entregáveis
+### Deliverables
 
-Para entregar o seu projeto você deverá criar um Pull Request neste repositório. Este Pull Request deverá conter os arquivos SQL dos desafios 1 ao 13.
+To deliver your project you must create a Pull Request in this repository. This Pull Request must contain the SQL files from challenges 1 to 13.
 
-Qualquer dúvida, procure a monitoria. Lembre-se que você pode consultar nosso conteúdo sobre Git & GitHub sempre que quiser!
+Any questions, look for monitoring. Remember, you can consult our content on Git & GitHub whenever you want!
 
-### DEPOIS DE TERMINAR O DESENVOLVIMENTO
+### AFTER FINISHING DEVELOPMENT
 
-Para submeter o _Pull Request_ do seu projeto para avaliação, siga os passos a seguir:
+To submit your project's _Pull Request_ for evaluation, follow the steps below:
 
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-02`
+* Go to the **OF YOUR** _Pull Request_ page, add the label of _"code-review"_ and tag your colleagues
+  * In the menu on the right, click on the _link_ **"Labels"** and choose the _label_ **code-review**
+  * In the menu on the right, click on the _link_ **"Assignees"** and choose **your username**
+  * In the menu on the right, click on the _link_ **"Reviewers"** and type `students`, select the team `tryber/students-sd-02`
 
-Se ainda houver alguma dúvida sobre como entregar seu projeto, [aqui tem um video explicativo](https://vimeo.com/362189205).
+If there is still any doubt about how to deliver your project, [here is an explanatory video](https://vimeo.com/362189205).
