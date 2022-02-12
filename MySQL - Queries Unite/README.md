@@ -1,4 +1,4 @@
-### Problem to be solved
+### Problem to be solved 
 
 Imagine that the management of your software development company has asked you to design a database for the following situation:
 
