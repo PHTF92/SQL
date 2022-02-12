@@ -152,7 +152,7 @@ We want some information about the company's billing. Based on the value of the 
 
 Your `VIEW` should return the following information, when queried:
 
-![Current billing](./images/actual_billing.png)
+![Current billing](./images/faturamento_atual.png)
 
 ---
 
@@ -218,4 +218,4 @@ Your results should group songs by name and should be sorted by song name in asc
 
 Your `VIEW` should return the following information, when queried:
 
-![songs_premium](./images/songs_premium.png)
+![songs_premium](./images/cancoes_premium.png)
