@@ -29,7 +29,7 @@ Assemble queries to find the following information:
 
 ---
 
-## Table Manipulation Challenges
+## Table Manipulation Challenges 
 
 20. Add to `order_details` a line with the following data: `order_id`: 69, `product_id`: 80, `quantity`: 15,0000, `unit_price`: 15,0000, `discount`: 0, `status_id`: 2, `date_allocated`: NULL, `purchase_order_id`: NULL and `inventory_id`: 129 (Id should be automatically incremented).
 21. Add two lines to `order_details` with the same data. This data is again `order_id`: 69, `product_id`: 80, `quantity`: 15,0000, `unit_price`: 15,0000, `discount`: 0, `status_id`: 2, `date_allocated`: NULL, `purchase_order_id`: NULL and `inventory_id`: 129 (Id should be automatically incremented).
