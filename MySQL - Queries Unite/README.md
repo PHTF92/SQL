@@ -94,19 +94,15 @@ Your goal here is to have this information somewhere so you can use it in your n
 
 Identify the relationships between each of the entities.
 
-Then create a relationship diagram of the entities `users`, `travel_packages`, `locations`, `travel_packages_locations` and `purchases`. The following is an example diagram that visually demonstrates relationships between entities.
+Then create a relationship diagram of the entities `users`, `travel_packages`, `locations`, `travel_packages_locations` and `purchases`.
 
-![ER diagram, simplified, example](./images/relationship1.png)
-
-this sectiono is crucial for you to be able to map and visualize how an entity should relate to others. Your goal here is to have this information somewhere so you can use it in your next steps.
+This sectiono is crucial for you to be able to map and visualize how an entity should relate to others. Your goal here is to have this information somewhere so you can use it in your next steps.
 
 ---
 
 ### Detailed Entity-Relationship Diagram
 
-Create an entity-relationship diagram containing information about entities, attributes, and relationships. Do it similar to the diagram below (just an illustration 😎):
-
-![Illustrative entity-relationship diagram](./images/relationship2.png)
+Create an entity-relationship diagram containing information about entities, attributes, and relationships
 
 You can make this diagram either on paper or through a diagramming tool like [draw.io](https://www.draw.io/). If you decide to use [draw.io](https://www.draw.io/), watch [this video](https://www.youtube.com/watch?v=lAtCySGDD48) and learn more about this tool . Remember that you can activate the video subtitles, check the automatic translation option and then select the Portuguese language.
 
